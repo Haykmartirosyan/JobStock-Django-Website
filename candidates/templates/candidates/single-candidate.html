@@ -1,0 +1,110 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="clearfix"></div>
+        <section class="inner-header-title" style="background-image: url('{% static 'img/banner-1.jpg' %}'); background-position: center">
+            <div class="container">
+                <h1></h1></div>
+        </section>
+        <div class="clearfix"></div>
+        <section class="detail-desc">
+            <div class="container white-shadow">
+                <div class="row">
+                    <div class="detail-pic"><img src="{{ candidate.image.url }}" class="img" alt="" /></div>
+                    <div class="detail-status"><span>7 Hour Days Ago</span></div>
+                </div>
+                <div class="row bottom-mrg">
+                    <div class="col-md-8 col-sm-8">
+                        <div class="detail-desc-caption">
+                            <h4>{{ candidate.name }} {{ candidate.last_name }}</h4><span class="designation">{{ candidate.profession }}</span>
+                            <p>{{ candidate.about }}</p>
+                        </div>
+                        <div class="detail-desc-skill">
+                            {% for skill in candidate.skills.all %}
+                            <span>{{ skill.skill }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div class="get-touch">
+                            <h4>Get in Touch</h4>
+                            <ul>
+                                <li><i class="fa fa-map-marker"></i><span>{{ candidate.location }}</span></li>
+                                <li><i class="fa fa-envelope"></i><span>{{ candidate.email }}</span></li>
+                                <li><i class="fa fa-phone"></i><span>{{ candidate.phone_number }}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row no-padd">
+                    <div class="detail pannel-footer">
+                        <div class="col-md-5 col-sm-5">
+                            <ul class="detail-footer-social">
+                                {% if candidate.facebook_profile %}
+                                <li><a href="{{ candidate.facebook_profile }}" title="Facebook Profile" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                {% endif %}
+                                {% if candidate.twitter_profile %}
+                                <li><a href="{{ candidate.twitter_profile }}" title="Twitter Profile" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                {% endif %}
+                                {% if candidate.google_plus_profile %}
+                                <li><a href="{{ candidate.google_plus_profile }}" title="Google Plus Profile" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                                {% endif %}
+                                {% if candidate.linkedin_profile %}
+                                <li><a href="{{ candidate.linkedin_profile }}" title="LinkedIn Profile" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                {% endif %}
+                                {% if candidate.instagram_profile %}
+                                <li><a href="{{ candidate.instagram_profile }}" title="Instagram Profile"><i class="fa fa-instagram"></i></a></li>
+                                 {% endif %}
+                            </ul>
+                        </div>
+                        <div class="col-md-7 col-sm-7">
+                            <div class="detail-pannel-footer-btn pull-right"><a href="mailto:{{ candidate.email }}" class="footer-btn grn-btn" title=""><i class="fa fa-envelope"></i></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="full-detail-description full-detail">
+            <div class="container">
+                <div class="row row-bottom">
+                    <h2 class="detail-title">About Resume</h2>
+                    <p>{{ candidate.resume_content }}</p>
+                </div>
+                <div class="row row-bottom">
+                    <h2 class="detail-title">Education</h2>
+                    {% for education in candidate.education.all %}
+                    <ul class="detail-list">
+                        <li><b>{{ education.sckool_name }}</b> - {{ education.qualification }}, {{ education.date_from }} - {{ education.date_to }}</li>
+                    </ul>
+                    {% endfor %}
+                </div>
+                <div class="row row-bottom">
+                    <h2 class="detail-title">Work Experience</h2>
+                    {% for experience in candidate.experience.all %}
+                    <ul class="detail-list">
+                        <li><b>{{ experience.employer }}</b> - {{ experience.position }}, {{ experience.date_from }} - {{ experience.date_to }}</li>
+                    </ul>
+                    {% endfor %}
+                </div>
+                <div class="row row-bottom">
+                    <h2 class="detail-title">Skills</h2>
+                    <div class="ext-mrg row third-progress">
+                        {% for skill in candidate.skills.all %}
+                        <div class="col-md-4 col-sm-6">
+                            <div class="panel-body">
+                                <h3 class="progressbar-title">{{ skill.skill }}</h3>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: {{ skill.percent }}%; background: #26a9e1;"><span class="progress-icon fa fa-plus" style="border-color:#26a9e1; color:#26a9e1;"></span>
+                                        <div class="progress-value">{{ skill.percent }}%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+{% endblock %}

@@ -1,0 +1,185 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="clearfix"></div>
+        <div class="banner">
+            <div class="container">
+                <div class="banner-caption">
+                    <div class="col-md-12 col-sm-12 banner-text">
+                        <h1>Browse Jobs</h1>
+                        <form class="form-horizontal" action="/jobs/">
+                            <div class="col-md-4 no-padd">
+                                <div class="input-group">
+                                    <input type="text" class="form-control right-bor" name="q" placeholder="Skills, Designations, Companies"> </div>
+                            </div>
+                            <div class="col-md-3 no-padd">
+                                <div class="input-group">
+                                    <input type="text" class="form-control right-bor" name="s" placeholder="Search By Location.."> </div>
+                            </div>
+                            <div class="col-md-3 no-padd">
+                                <div class="input-group">
+                                    <select class="selectpicker form-control" name="c" multiple title="All Categories">
+                                    {% for cat in company_categories %}
+                                    <option>{{ cat.category }}</option>
+                                    {% endfor %}
+                                </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2 no-padd">
+                                <div class="input-group">
+                                    <button type="submit" class="btn btn-primary">Search Job</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="company-brand">
+                <div class="container">
+                    <div id="company-brands" class="owl-carousel">
+                        <div class="brand-img"><img src="{% static 'img/microsoft-home.png' %}" class="img-responsive" alt="" /></div>
+                        <div class="brand-img"><img src="{% static 'img/img-home.png' %}" class="img-responsive" alt="" /></div>
+                        <div class="brand-img"><img src="{% static 'img/mothercare-home.png' %}" class="img-responsive" alt="" /></div>
+                        <div class="brand-img"><img src="{% static 'img/paypal-home.png' %}" class="img-responsive" alt="" /></div>
+                        <div class="brand-img"><img src="{% static 'img/serv-home.png' %}" class="img-responsive" alt="" /></div>
+                        <div class="brand-img"><img src="{% static 'img/xerox-home.png' %}" class="img-responsive" alt="" /></div>
+                        <div class="brand-img"><img src="{% static 'img/yahoo-home.png' %}" class="img-responsive" alt="" /></div>
+                        <div class="brand-img"><img src="{% static 'img/mothercare-home.png' %}" class="img-responsive" alt="" /></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+     <section class="testimonial" id="testimonial">
+            <div class="container">
+                <div class="row">
+                    <div class="main-heading">
+                        <h2>Our <span>Candidates</span></h2></div>
+                </div>
+                <div class="row">
+                    <div id="client-testimonial-slider" class="owl-carousel">
+                        {% for candidate in candidates %}
+                            <a href="candidates/{{ candidate.id }}">
+                                <div class="client-testimonial">
+                                    <div class="pic"><img src="{{ candidate.image.url }}" alt=""></div>
+                                    <p class="client-description">{{ candidate.about }}</p>
+                                    <h3 class="client-testimonial-title">{{ candidate.name }} {{ candidate.last_name }}</h3>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="clearfix"></div>
+
+        <section class="video-sec dark" id="video" style="background-image: url('{% static 'img/blog/3.jpg' %}')">
+            <div class="container">
+                <div class="row">
+                    <div class="main-heading">
+                        <p>Best For Your Projects</p>
+                        <h2>Watch Our <span>video</span></h2></div>
+                </div>
+                <div class="video-part"><a href="#" data-toggle="modal" data-target="#my-video" class="video-btn"><i class="fa fa-play"></i></a></div>
+            </div>
+        </section>
+    <div class="clearfix"></div>
+    <section class="wp-process">
+            <div class="container">
+                <div class="row">
+                    <div class="main-heading">
+                        <p>How We Work</p>
+                        <h2>Our Work <span>Process</span></h2></div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="work-process">
+                        <div class="work-process-icon"><span class="icon-search"></span></div>
+                        <div class="work-process-caption">
+                            <h4>Search Job</h4>
+                            <p>Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum congue posuere lacus</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="work-process">
+                        <div class="work-process-icon"><span class="icon-mobile"></span></div>
+                        <div class="work-process-caption">
+                            <h4>Find Job</h4>
+                            <p>Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum congue posuere lacus</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="work-process">
+                        <div class="work-process-icon"><span class="icon-profile-male"></span></div>
+                        <div class="work-process-caption">
+                            <h4>Hire Employee</h4>
+                            <p>Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum congue posuere lacus</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="work-process">
+                        <div class="work-process-icon"><span class="icon-layers"></span></div>
+                        <div class="work-process-caption">
+                            <h4>Start Work</h4>
+                            <p>Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum congue posuere lacus</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="work-process">
+                        <div class="work-process-icon"><span class="icon-wallet"></span></div>
+                        <div class="work-process-caption">
+                            <h4>Pay Money</h4>
+                            <p>Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum congue posuere lacus</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="work-process">
+                        <div class="work-process-icon"><span class="icon-happy"></span></div>
+                        <div class="work-process-caption">
+                            <h4>Happy</h4>
+                            <p>Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum congue posuere lacus</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="clearfix"></div>
+
+
+        <section class="video-sec dark" id="video" style="background-image: url('{% static 'img/blog/3.jpg' %}')">
+            <div class="container">
+                <div class="row">
+                    <div class="main-heading">
+                        <p>Best For Your Projects</p>
+                        <h2>Watch Our <span>video</span></h2></div>
+                </div>
+                <div class="video-part"><a href="#" data-toggle="modal" data-target="#my-video" class="video-btn"><i class="fa fa-play"></i></a></div>
+            </div>
+        </section>
+    <div class="clearfix"></div>
+    <section class="first-feature">
+            <div class="container">
+                <div class="all-features">
+                  {% for cat in company_categories %}
+                      <a href="companies/?q={{ cat.category.name }}" name="q">
+                          <div class="col-md-3 col-sm-6 small-padding">
+                            <div class="job-feature">
+                                <div class="feature-icon"><i class="fa fa-adjust"></i></div>
+                                <div class="feature-caption">
+                                    <h5>{{ cat.category.name }}</h5>
+                                    <p>{{ cat.tagline }}</p>
+                                </div>
+                            </div>
+                        </div>
+                      </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <div class="clearfix"></div>
+{% endblock %}

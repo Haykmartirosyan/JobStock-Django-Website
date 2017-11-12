@@ -1,0 +1,24 @@
+{% load static %}
+<nav class="navbar navbar-default navbar-fixed navbar-transparent white bootsnav">
+            <div class="container">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu"><i class="fa fa-bars"></i></button>
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{% url 'Home:index' %}">
+                        <img src="{% static 'img/logo.png' %}" class="logo logo-display" alt="">
+                        <img src="{% static 'img/logo-white.png' %}" class="logo logo-scrolled" alt="">
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <ul class="nav navbar-nav navbar-left" data-in="fadeInDown" data-out="fadeOutUp">
+                        <li><a href="{% url 'Home:index' %}">Home</a></li>
+                        <li><a href="{% url 'Jobs:index' %}">Jobs</a></li>
+                        <li><a href="{% url 'Candidates:index' %}">Candidates</a></li>
+                        <li><a href="{% url 'Companies:index' %}">Companies</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                        <li><a href="login.html"><i class="fa fa-pencil" aria-hidden="true"></i>Sign In</a></li>
+                        <li class="left-br"><a href="javascript:void(0)" data-toggle="modal" data-target="#signup" class="signin">Register Now</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>

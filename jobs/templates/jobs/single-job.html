@@ -1,0 +1,93 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="clearfix"></div>
+        <section class="inner-header-title" style="background-image: url('{% static 'img/banner-1.jpg' %}')">
+            <div class="container">
+                <h1>Job Detail</h1></div>
+        </section>
+        <div class="clearfix"></div>
+        <section class="detail-desc advance-detail-pr gray-bg">
+            <div class="container white-shadow">
+                <div class="row">
+                    <div class="detail-pic"><img src="{{ job.company.logo.url }}" class="img" alt="" /></div>
+                    <div class="detail-status"><span>Dedline {{ job.dedline }}</span></div>
+                </div>
+                <div class="row bottom-mrg">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="advance-detail detail-desc-caption">
+                            <h4>{{ job.title }}</h4><span class="designation">{{ job.company.name }}</span>
+                            <div style="margin-left: 40%;">
+                                <ul>
+                                    <li><strong class="j-shared">{{ job.company.job.count }}</strong>Job Shared</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row no-padd">
+                    <div class="detail pannel-footer">
+                        <div class="col-md-5 col-sm-5">
+                            <ul class="detail-footer-social">
+                                {% if job.company.facebook_profile %}
+                                <li><a href="{{ job.company.facebook_profile }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                {% endif %}
+                            {% if job.company.google_plus_profile %}
+                                <li><a href="{{ job.company.google_plus_profile }}" target="_blank"><i class="fa fa-google-plus"></i></a>
+                            {% endif %}
+                            {% if job.company.twitter_profile %}
+                                <li><a href="{{ job.company.twitter_profile }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                            {% endif %}
+                            {% if job.company.linkedin_profile %}
+                                <li><a href="{{ job.company.linkedin_profile }}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                            {% endif %}
+                            {% if job.company.instagram_profile %}
+                                <li><a href="{{ job.company.instagram_profile }}" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                            {% endif %}
+                            </ul>
+                        </div>
+                        <div class="col-md-7 col-sm-7">
+                            <div class="detail-pannel-footer-btn pull-right"><a href="mailto:{{ job.company.email }}" class="footer-btn grn-btn" title="Company Email">Quick Apply</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="full-detail-description full-detail gray-bg">
+            <div class="container">
+                <div class="col-md-12 col-sm-12">
+                    <div class="full-card">
+                        <div class="row row-bottom">
+                            <h2 class="detail-title">Job Detail</h2>
+                            <ul class="job-detail-des">
+                                <li><span>Industry:</span>{{ job.company.tagline }}</li>
+                                <li><span>Role Category:</span>{{ job.company.category }}</li>
+                                <li><span>Role:</span>{{ job.title }}</li>
+                                <li><span>Job Type:</span>{{ job.type }}</li>
+                            </ul>
+                        </div>
+                        <div class="row row-bottom">
+                            <h2 class="detail-title">Job Responsibilities</h2>
+                            <p>{{ job.description }}</p>
+                        </div>
+                        <div class="row row-bottom">
+                            <h2 class="detail-title">Skill Requirement</h2>
+                            <p>{{ job.requirement }}</p>
+                        </div>
+                       <div class="row row-bottom">
+                            <h2 class="detail-title">Location</h2>
+                            <ul class="job-detail-des">
+                                <li><span>Address:</span>{{ job.company.location }}</li>
+                                <li><span>Telephone:</span>{{ job.company.phone_number }}</li>
+                                <li><span>Email:</span>{{ job.company.email }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+{% endblock %}

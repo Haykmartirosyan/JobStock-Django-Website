@@ -1,0 +1,95 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="clearfix"></div>
+        <section class="inner-header-title" style="background-image: url('{% static 'img/blog/2.jpg' %}'); background-position: center">
+            <div class="container">
+                <h1>Browse Company</h1></div>
+        </section>
+        <div class="clearfix"></div>
+        <section class="browse-company">
+            <div class="container">
+                <div class="row extra-mrg">
+                    <div class="wrap-search-filter">
+                        <form>
+                            <div class="col-md-4 col-sm-4">
+                                <input type="text" name="q" value="{{request.GET.q}}" class="form-control" placeholder="Keyword: Name, Tag">
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <input type="text" name="s" value="{{request.GET.s}}" class="form-control" placeholder="Location: City, State, Zip">
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <select class="selectpicker form-control" name="c" multiple title="All Categories">
+                                    {% for cat in companies %}
+                                    <option>{{ cat.category }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-2 col-sm-2">
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            {% if company_page %}
+                {% for company in company_page %}
+                <a href="{{ company.id }}/" class="item-click">
+                    <article>
+                        <div class="brows-company">
+                            <div class="col-md-2 col-sm-2">
+                                <div class="brows-company-pic"><img src="{{ company.logo.url }}" class="img-responsive" alt="" /></div>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="brows-company-name">
+                                    <h4>{{ company.name }}</h4><span class="brows-company-tagline">{{ company.tagline }}</span></div>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="brows-company-location">
+                                    <p><i class="fa fa-map-marker"></i> {{ company.location }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-2">
+                                <div class="brows-company-position">
+                                    <p><b>{{ company.job.count }}</b> Opening Job</p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </a>
+                {% endfor %}
+            {% else %}
+                <section class="default-section  bg-color outside-hidden">
+                    <div class="sec-title text-center main-title">
+                        <h1 class="default-title text-uppercase">Company Not Found</h1>
+                    </div>
+                </section>
+            {%endif%}
+
+                <div class="row">
+                    {% if candidate_page.has_other_pages %}
+                      <ul class="pagination">
+                        {% if candidate_page.has_previous %}
+                          <li><a href="?page={{ candidate_page.previous_page_number }}{%if request.GET.q%}&{{request.GET.q}}{%endif%}">&ensp;&laquo;&ensp;</a></li>
+                        {% else %}
+                          <li class="disabled"><span>&laquo;</span></li>
+                        {% endif %}
+                        {% for i in candidate_page.paginator.page_range %}
+                          {% if candidate_page.number == i %}
+                            <li class="active" ><a href="?page={{ i }}" ><span>{{ i }} <span class="sr-only">(current)</span></span></a></li>
+                          {% else %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                          {% endif %}
+                        {% endfor %}
+                        {% if candidate_page.has_next %}
+                          <li><a href="?page={{ candidate_page.next_page_number }}{%if request.GET.q%}&{{request.GET.q}}{%endif%}">&ensp;&raquo;&ensp;</a></li>
+                        {% else %}
+                          <li class="disabled"><span>&raquo;</span></li>
+                        {% endif %}
+                      </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+
+{% endblock %}

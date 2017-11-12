@@ -1,0 +1,90 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="clearfix"></div>
+        <section class="inner-header-title" style="background-image: url('{% static 'img/blog/1.jpg' %}')">
+            <div class="container">
+                <h1>Manage Employee</h1></div>
+        </section>
+        <div class="clearfix"></div>
+        <section class="manage-employee gray">
+            <div class="container">
+                <div class="row">
+                    <div class="search-filter">
+                        <div class="col-md-5 col-sm-5">
+                            <form action="">
+                                <div class="filter-form">
+                                    <div class="input-group">
+                                        <input type="search" class="form-control" name="q" value="{{request.GET.q}}" placeholder="Search…">
+                                        <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-default" value="">Go</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {%if candidate_page%}
+                {% for candidate in candidate_page %}
+                <div class="col-md-4">
+                    <div class="jn-employee"><a href="mailto:{{ candidate.email }}" class="mail-form"><i class="fa fa-envelope"></i></a>
+                        <div class="employee-caption">
+                            <div class="employee-caption-pic"><a href="{{ candidate.id }}/"><img src="{{ candidate.image.url }}" class="img-responsive" alt="" /></a></div>
+                            <h4><a href="{{ candidate.id }}/">{{ candidate.name }} {{ candidate.last_name }}</a></h4><span class="designation">{{ candidate.profession }}</span>
+                            <ul class="employee-social">
+                                 {% if candidate.facebook_profile %}
+                                <li><a href="{{ candidate.facebook_profile }}" title="Facebook Profile" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                {% endif %}
+                                {% if candidate.twitter_profile %}
+                                <li><a href="{{ candidate.twitter_profile }}" title="Twitter Profile" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                {% endif %}
+                                {% if candidate.google_plus_profile %}
+                                <li><a href="{{ candidate.google_plus_profile }}" title="Google Plus Profile" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                                {% endif %}
+                                {% if candidate.linkedin_profile %}
+                                <li><a href="{{ candidate.linkedin_profile }}" title="LinkedIn Profile" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                {% endif %}
+                                {% if candidate.instagram_profile %}
+                                <li><a href="{{ candidate.instagram_profile }}" title="Instagram Profile" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                                 {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+              {% else %}
+                <section class="default-section  bg-color outside-hidden">
+                    <div class="sec-title text-center main-title">
+                        <h1 class="default-title text-uppercase">Candidates Not Found</h1>
+                    </div>
+                </section>
+            {%endif%}
+
+                <div class="row">
+                    {% if candidate_page.has_other_pages %}
+                      <ul class="pagination">
+                        {% if candidate_page.has_previous %}
+                          <li><a href="?page={{ candidate_page.previous_page_number }}{%if request.GET.q%}&{{request.GET.q}}{%endif%}">&ensp;&laquo;&ensp;</a></li>
+                        {% else %}
+                          <li class="disabled"><span>&laquo;</span></li>
+                        {% endif %}
+                        {% for i in candidate_page.paginator.page_range %}
+                          {% if candidate_page.number == i %}
+                            <li class="active" ><a href="?page={{ i }}" ><span>{{ i }} <span class="sr-only">(current)</span></span></a></li>
+                          {% else %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                          {% endif %}
+                        {% endfor %}
+                        {% if candidate_page.has_next %}
+                          <li><a href="?page={{ candidate_page.next_page_number }}{%if request.GET.q%}&{{request.GET.q}}{%endif%}">&ensp;&raquo;&ensp;</a></li>
+                        {% else %}
+                          <li class="disabled"><span>&raquo;</span></li>
+                        {% endif %}
+                      </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+
+{% endblock %}

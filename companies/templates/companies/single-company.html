@@ -1,0 +1,86 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="clearfix"></div>
+        <section class="inner-header-title" style="background-image: url('{% static 'img/banner-1.jpg' %}'); background-position: center">
+            <div class="container">
+                <h1></h1></div>
+        </section>
+        <div class="clearfix"></div>
+        <section class="detail-desc gray">
+            <div class="container white-shadow">
+                <div class="row">
+                    <div class="detail-pic"><img src="{{ company.logo.url }}" class="img" alt="" /></div>
+                    <div class="detail-status"><span>10 Min Days Ago</span></div>
+                </div>
+                <div class="row bottom-mrg">
+                    <div class="col-md-8 col-sm-8">
+                        <div class="detail-desc-caption">
+                            <h4>{{ company.name }}</h4><span class="designation"><i>{{ company.tagline }}</i></span>
+                            <p>{{ company.description }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div class="get-touch">
+                            <h4>Get in Touch</h4>
+                            <ul>
+                                <li><i class="fa fa-map-marker"></i><span>{{ company.location }}</span></li>
+                                <li><i class="fa fa-envelope"></i><span>{{ company.email }}</span></li>
+                                <a href="{{ company.web_site }}" target="_blank"><li><i class="fa fa-globe"></i><span>{{ company.web_site }}</span></li></a>
+                                <li><i class="fa fa-phone"></i><span>{{ company.phone_number }}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row no-padd">
+                    <div class="detail pannel-footer">
+                        <div class="col-md-5 col-sm-5">
+                            <ul class="detail-footer-social">
+                                {% if company.facebook_profile %}
+                                <li><a href="{{ company.facebook_profile }}" title="Facebook Profile" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                {% endif %}
+                                {% if company.twitter_profile %}
+                                <li><a href="{{ company.twitter_profile }}" title="Twitter Profile" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                {% endif %}
+                                {% if company.google_plus_profile %}
+                                <li><a href="{{ company.google_plus_profile }}" title="Google Plus Profile" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                                {% endif %}
+                                {% if company.linkedin_profile %}
+                                <li><a href="{{ company.linkedin_profile }}" title="LinkedIn Profile" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                {% endif %}
+                                {% if company.instagram_profile %}
+                                <li><a href="{{ company.instagram_profile }}" title="Instagram Profile" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                                 {% endif %}
+                            </ul>
+                        </div>
+                        <div class="col-md-7 col-sm-7">
+                            <div class="detail-pannel-footer-btn pull-right"><a href="mailto:{{ company.email }}" class="footer-btn grn-btn" title=""><i class="fa fa-envelope"></i></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="full-detail-description full-detail gray">
+            <div class="container">
+                <div class="row row-bottom">
+                    <h2 class="detail-title">About Company</h2>
+                    <p>{{ company.about }}</p>
+                </div>
+                <div class="row row-bottom ">
+                    <h2 class="detail-title">Required Jobs</h2>
+                    {% for job in company.job.all %}
+                    <div class="col-md-4 col-sm-4">
+                    <div class="manage-cndt">
+                        <div class="cndt-caption">
+                            <h4>{{ job.title }}</h4><span>{{ job.type }}</span>
+                            <p>Dedline <b>{{ job.dedline }}</b></p>
+                        </div>
+                        <a href="/jobs/{{ job.id }}" title="" class="cndt-profile-btn">View Job</a></div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+{% endblock %}
