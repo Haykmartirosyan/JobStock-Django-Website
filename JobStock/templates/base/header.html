@@ -16,8 +16,15 @@
                         <li><a href="{% url 'Companies:index' %}">Companies</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li><a href="login.html"><i class="fa fa-pencil" aria-hidden="true"></i>Sign In</a></li>
-                        <li class="left-br"><a href="javascript:void(0)" data-toggle="modal" data-target="#signup" class="signin">Register Now</a></li>
+                        {% if user.is_authenticated %}
+                            {{ user.username }}
+      <li><a href="{% url 'Accounts:logout' %}">Log Out</a></li>
+      {% else %}
+      <li><a href="{% url 'Accounts:login' %}">Log In</a></li>
+                            <li class="left-br"><a href="{% url 'Accounts:signup' %}"  class="signin">Register Now</a></li>
+      {% endif %}
+{#                        <li><a href="{% url 'Accounts:login' %}"><i class="fa fa-pencil" aria-hidden="true"></i>Sign In</a></li>#}
+
                     </ul>
                 </div>
             </div>

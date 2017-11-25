@@ -1,7 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Candidates(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default=None)
     image = models.ImageField(upload_to='candidates_images')
     name = models.CharField(max_length=64, blank=True, null=True, default=None)
     last_name = models.CharField(max_length=64, blank=True, null=True, default=None)
@@ -9,7 +13,7 @@ class Candidates(models.Model):
     about = models.TextField(blank=True, null=True, default=None)
     email = models.EmailField()
     web_site = models.URLField(max_length=64, blank=True, null=True, default=None)
-    phone_number = models.CharField(max_length=64, default=None)
+    phone_number = models.CharField(max_length=64, default=None, null=True)
     location = models.CharField(max_length=64, blank=True, null=True, default=None)
     facebook_profile = models.URLField(max_length=64, blank=True, null=True, default=None)
     twitter_profile = models.URLField(max_length=64, blank=True, null=True, default=None)
@@ -18,7 +22,6 @@ class Candidates(models.Model):
     instagram_profile = models.URLField(max_length=64, blank=True, null=True, default=None)
     dr_profile = models.URLField(max_length=64, blank=True, null=True, default=None)
     resume_content = models.TextField(blank=True, null=True, default=None)
-    password = models.CharField(blank=False, max_length=40, default=None)
 
     def __str__(self):
         return "%s" % self.name

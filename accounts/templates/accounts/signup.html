@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<div class="simple-bg-screen" style="background-image: url('{% static 'img/banner-1.jpg' %}')">
 
-</body>
-</html>
+    <section class="signup-screen-sec">
+            <div class="container">
+                <div class="signup-screen">
+                    <a href="{% url 'Home:index' %}"><img src="{% static 'img/logo.png' %}" class="img-responsive" alt=""></a>
+                    <form method="post">
+                        {% csrf_token %}
+
+                         <form>
+                        <input type="text" class="form-control" name="username" placeholder="Your Name">
+                        <input type="email" class="form-control" name="email" placeholder="Your Email">
+                        <input type="password" class="form-control" name="password1" placeholder="Password">
+                        <input type="password" class="form-control" name="password2" placeholder="Repeat Password">
+                        <button class="btn btn-login" type="submit">Sign Up</button><span>Have You Account? <a href="{% url 'Accounts:login' %}"> Login</a></span></form>
+
+                      </form>
+                </div>
+            </div>
+        </section>
+</div>
+{% endblock %}

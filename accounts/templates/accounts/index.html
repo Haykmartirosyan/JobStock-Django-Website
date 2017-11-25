@@ -7,9 +7,10 @@
                 <div class="login-screen">
                     <a href="{% url 'Home:index' %}"><img src="{% static 'img/logo.png' %}" class="img-responsive" alt=""></a>
                     <form>
+                        {% csrf_token %}
                         <input type="text" class="form-control" placeholder="Useraname">
                         <input type="password" class="form-control" placeholder="Password">
-                        <button class="btn btn-login" type="submit">Login</button><span>You Have No Account? <a href="signup.html"> Create An Account</a></span><span><a href="lost-password.html"> Forget Password</a></span></form>
+                        <button class="btn btn-login" type="submit">Login</button><span>You Have No Account? <a href="{% url 'Accounts:signup' %}"> Create An Account</a></span></form>
                 </div>
             </div>
         </section>
